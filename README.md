@@ -62,6 +62,44 @@ The `ai_astrologer.py` script works as follows:
 7. The generated response is displayed to the user.
 8. The user can choose to ask another question or exit the script.
 
+### Understanding and Modifying the CSV Files
+
+The AI Astrologer script relies on two CSV files: `realdata.csv` and `QA2.csv`. These files play a crucial role in generating personalized astrological insights. Here's how they work and how you can modify them:
+
+#### `realdata.csv`
+
+This file contains detailed attributes for various astrological sign combinations. Each row represents a unique sign combination (e.g., "Aries Metal Monkey") and provides insights across several categories like love, career, self-traits, compatibility, etc.
+
+**Columns:**
+
+- **SIGN:** The combination of a zodiac sign and an element/animal (e.g., "Aries Metal Monkey").
+- **LOVE - WORDS, LOVE LANGUAGE:** Descriptions and preferred love languages for the sign combination.
+- **CAREER - CHARACTERISTICS, SECTOR, JOBS:** Attributes related to career preferences, ideal sectors, and job titles.
+- **MYSELF - TRAITS, CHALLENGES, TYPE, RULING PLANET, GEMSTONES, FULL MOON, YEAR OF THE DRAGON:** Various personal traits, challenges, personality types, ruling planets, gemstones, effects during the full moon, and characteristics for the year of the Dragon.
+- **COMPATIBILITY:** Compatibility with other signs.
+
+**Modifying `realdata.csv`:**
+
+To add a new sign combination or update an existing one, simply modify the CSV file accordingly. Ensure you maintain the format and provide information for each column relevant to the sign combination you're adding or updating.
+
+#### `QA2.csv`
+
+This file contains a list of questions that can be asked by the user, along with the mapping to the relevant columns in the `realdata.csv` file. This structure allows the script to fetch and construct responses based on the selected question and user's sign combination.
+
+**Columns:**
+
+- **Question:** The question that can be asked by the user.
+- **Main category:** The broad category to which the question belongs (e.g., Love, Career, Myself, Compatibility).
+- **Column 1, Column 2, Column 3:** These columns specify which columns from `realdata.csv` should be used to construct the answer. It allows the script to dynamically fetch relevant data based on the question.
+
+**Modifying `QA2.csv`:**
+
+To add new questions or modify existing ones:
+1. Add a row for each new question.
+2. Specify the main category.
+3. Indicate which columns from `realdata.csv` are relevant for constructing the response to this question.
+
+
 ## Contributing
 
 If you'd like to contribute to this project, please follow these steps:
