@@ -6,6 +6,7 @@
 from openai import OpenAI
 import pandas as pd
 import os
+import random
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -48,7 +49,28 @@ def generate_response(question_row, sign_combination):
     relevant_columns = [col for col in question_row[['Column 1', 'Column 2', 'Column 3']].dropna()]
     relevant_info = ' | '.join([f"{col}: {row.iloc[0][col]}" for col in relevant_columns if col in row.columns])
 
-    prompt = f"You are a Life Coach that knows astrology offering insights to someone with the combined astrological sign '{sign_combination}', which represents a unique blend of traits from each element. They are exhibiting traits such as {', '.join([row.iloc[0][col] for col in relevant_columns if col in row.columns])}. They are on a journey of personal growth and self-discovery, asking, '{question_row['Question:']}' Respond with wisdom, encouragement, and practical tips to help them embrace their authentic self, considering the combined traits of their astrological sign '{sign_combination}'. Please always start the answer by referring to their combined sign, e.g., 'As a {sign_combination},...'. Also, don't provide starting lines like 'Dear seeker' or sign-off messages at the end; just provide the body of the message."
+    opening_phrases = [
+        "you possess",
+        "you are",
+        "you feel",
+        "you seek",
+        "you embody",
+        "you are the epitome of",
+        "people see you as",
+        "people view you as",
+        "people love your",
+        "you're identified as",
+        "you represent",
+        "you equate to",
+        "you're considered",
+        "you're seen as",
+        "you find yourself",
+        "you're recognised as"
+    ]
+
+    random_opening = random.choice(opening_phrases)
+
+    prompt = f"You are a Life Coach that knows astrology offering insights to someone with the combined astrological sign '{sign_combination}', which represents a unique blend of traits from each element. They are exhibiting traits such as {', '.join([row.iloc[0][col] for col in relevant_columns if col in row.columns])}. They are on a journey of personal growth and self-discovery, asking, '{question_row['Question:']}' Respond with wisdom, encouragement, and practical tips to help them embrace their authentic self, considering the combined traits of their astrological sign '{sign_combination}'. Please always start the answer by referring to their combined sign, e.g., 'As a {sign_combination}, {random_opening}...'. Also, don't provide starting lines like 'Dear seeker' or sign-off messages at the end; just provide the body of the message."
 
     print("\n--- Prompt Info ---")
     print(f"Prompt: {prompt}\n")
