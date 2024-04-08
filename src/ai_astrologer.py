@@ -50,27 +50,21 @@ def generate_response(question_row, sign_combination):
     relevant_info = ' | '.join([f"{col}: {row.iloc[0][col]}" for col in relevant_columns if col in row.columns])
 
     opening_phrases = [
-        "you possess",
-        "you are",
-        "you feel",
-        "you seek",
-        "you embody",
-        "you are the epitome of",
-        "people see you as",
-        "people view you as",
-        "people love your",
-        "you're identified as",
-        "you represent",
-        "you equate to",
-        "you're considered",
-        "you're seen as",
-        "you find yourself",
-        "you're recognised as"
+        "you're a force to be reckoned with",
+        "you're the embodiment of magnetism",
+        "you're a fiery enigma wrapped in a tantalizing package",
+        "you're a captivating blend of traits",
+        "you're an irresistible mystery waiting to be unraveled",
+        "you're a walking, talking enchantment",
+        "you're a spellbinding combination of elements",
+        "you're a mesmerizing paradox",
+        "you're an alluring riddle that everyone wants to solve",
+        "you're a tantalizing fusion of characteristics"
     ]
 
     random_opening = random.choice(opening_phrases)
 
-    prompt = f"You are a Life Coach that knows astrology offering insights to someone with the combined astrological sign '{sign_combination}', which represents a unique blend of traits from each element. They are exhibiting traits such as {', '.join([row.iloc[0][col] for col in relevant_columns if col in row.columns])}. They are on a journey of personal growth and self-discovery, asking, '{question_row['Question:']}' Respond with wisdom, encouragement, and practical tips to help them embrace their authentic self, considering the combined traits of their astrological sign '{sign_combination}'. Please always start the answer by referring to their combined sign, e.g., 'As a {sign_combination}, {random_opening}...'. Also, don't provide starting lines like 'Dear seeker' or sign-off messages at the end; just provide the body of the message."
+    prompt = f"You are a sassy and mysterious Life Coach with expertise in astrology, offering insights to someone with the combined astrological sign '{sign_combination}', which represents a unique blend of traits from each element. They are exhibiting traits such as {', '.join([row.iloc[0][col] for col in relevant_columns if col in row.columns])}. They are on a journey of personal growth and self-discovery, asking, '{question_row['Question:']}' Respond in a fun, sassy, and mysterious way, providing wisdom, encouragement, and practical tips to help them embrace their authentic self, considering the combined traits of their astrological sign '{sign_combination}'. Use bold statements, playful language, and a touch of intrigue in your response. Start the answer by referring to their combined sign in a playful manner, e.g., 'As a {sign_combination}, {random_opening}...'. Focus on delivering the core message with sass and mystery, leaving them yearning for more. Avoid generic starting lines, sign-off messages, and the phrase 'my dear'."
 
     print("\n--- Prompt Info ---")
     print(f"Prompt: {prompt}\n")
@@ -78,7 +72,7 @@ def generate_response(question_row, sign_combination):
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are a helpful AI astrologer."},
+            {"role": "system", "content": "You are a sassy and mysterious AI astrologer."},
             {"role": "user", "content": prompt}
         ],
         temperature=0.7
